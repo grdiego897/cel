@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Provincias • Comunidad Energética</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-white relative">
+  <div class="flex flex-col h-screen pl-6 pr-5 overflow-hidden">
+    <!-- Header -->
+    <header class="flex items-center justify-between h-[5.2rem] mt-1 select-none">
+      <button class="text-5xl leading-none">&#9776;</button>
+      <img src="dslogo.jpg" alt="logo" class="h-16" />
+      <div></div>
+    </header>
+
+    <h1 class="text-2xl font-bold mt-1 mb-4">Provincias</h1>
+
+    <!-- Pager (4 filas, hint a la siguiente página) -->
+    <section id="pager" class="flex-1 flex overflow-x-auto snap-x snap-mandatory hide-scrollbar">
+      <!-- ===== Página 1 ===== -->
+      <div class="flex-none w-[88%] pr-6 snap-start">
+        <div class="grid grid-rows-4 gap-7 h-full">
+          <!-- Botón provincia -->
+          <button class="province flex items-center space-x-5" data-prov="Cadiz">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Cádiz</span>
+              <span class="text-gray-500 text-[14px]">6 municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+          <button class="province flex items-center space-x-5" data-prov="Almeria">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Almería</span>
+              <span class="text-gray-500 text-[14px]">X municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+          <button class="province flex items-center space-x-5" data-prov="Avila">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Ávila</span>
+              <span class="text-gray-500 text-[14px]">X municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+          <button class="province flex items-center space-x-5" data-prov="Badajoz">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Badajoz</span>
+              <span class="text-gray-500 text-[14px]">X municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== Página 2 ===== -->
+      <div class="flex-none w-[88%] pr-6 snap-start">
+        <div class="grid grid-rows-4 gap-7 h-full">
+          <button class="province flex items-center space-x-5" data-prov="Castellon">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Castellón</span>
+              <span class="text-gray-500 text-[14px]">X municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+          <button class="province flex items-center space-x-5" data-prov="Ciudad Real">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Ciudad Real</span>
+              <span class="text-gray-500 text-[14px]">X municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+          <button class="province flex items-center space-x-5" data-prov="Cordoba">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Córdoba</span>
+              <span class="text-gray-500 text-[14px]">X municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+          <button class="province flex items-center space-x-5" data-prov="Cuenca">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Cuenca</span>
+              <span class="text-gray-500 text-[14px]">X municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== Página 3 ===== -->
+      <div class="flex-none w-[88%] pr-6 snap-start">
+        <div class="grid grid-rows-4 gap-7 h-full">
+          <button class="province flex items-center space-x-5" data-prov="Girona">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Girona</span>
+              <span class="text-gray-500 text-[14px]">X municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+          <button class="province flex items-center space-x-5" data-prov="Granada">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Granada</span>
+              <span class="text-gray-500 text-[14px]">8 municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+          <button class="province flex items-center space-x-5" data-prov="Guadalajara">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Guadalajara</span>
+              <span class="text-gray-500 text-[14px]">X municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+          <button class="province flex items-center space-x-5" data-prov="Huelva">
+            <div class="w-28 h-28 bg-gray-200 rounded-2xl"></div>
+            <div class="flex flex-col text-[17px] leading-snug">
+              <span class="font-semibold">Huelva</span>
+              <span class="text-gray-500 text-[14px]">5 municipios<br>Y kW ahorrados</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center pb-2 text-gray-500 text-[12px] font-medium">
+      <span id="page-indicator">1/3</span>
+    </footer>
+  </div>
+
+  <!-- ============ Panel Municipios ============ -->
+  <div id="panel" class="fixed inset-x-0 top-[5.5rem] bottom-0 translate-y-full transition-transform duration-300 ease-out z-30">
+    <div class="h-full bg-gray-100 rounded-t-2xl shadow-xl mx-4 overflow-hidden">
+      <div class="relative py-4">
+        <h2 id="panel-title" class="text-xl font-semibold text-center">Provincia</h2>
+        <button id="close-panel" class="text-2xl absolute right-4 top-1/2 -translate-y-1/2">&#9660;</button>
+      </div>
+      <div id="muni-grid" class="grid grid-cols-2 gap-4 px-4 pb-6 overflow-y-auto hide-scrollbar h-[calc(100%-4rem)]"></div>
+    </div>
+  </div>
+
+  <script>
+    // ---------- indicador de página ----------
+    const pager = document.getElementById('pager');
+    const indicator = document.getElementById('page-indicator');
+    const pages = pager.children.length;
+    function updateIndicator() {
+      const w = pager.children[0].offsetWidth;
+      indicator.textContent = `${Math.round(pager.scrollLeft / w) + 1}/${pages}`;
+    }
+    pager.addEventListener('scroll', () => requestAnimationFrame(updateIndicator));
+
+    // ---------- datos de municipios (mock) ----------
+    const data = {
+      Cadiz: ['Barbate', 'El Bosque', 'El Gastor', 'Jimena de la Frontera', 'Setenil de las Bodegas', 'Torre Alháquime'],
+      Almeria: ['Adra', 'Níjar', 'Roquetas de Mar'],
+      Avila: ['Arenas de San Pedro', 'Cebreros'],
+      Badajoz: ['Almendralejo', 'Zafra'],
+      Castellon: ['Benicàssim', 'Peñíscola'],
+      'Ciudad Real': ['Almagro', 'Valdepeñas'],
+      Cordoba: ['Lucena', 'Priego de Córdoba'],
+      Cuenca: ['Belmonte', 'Tarancón'],
+      Girona: ['Figueres', 'Blanes'],
+      Granada: ['Almuñécar', 'Baza', 'Guadix', 'Íllora'],
+      Guadalajara: ['Brihuega', 'Sigüenza'],
+      Huelva: ['Ayamonte', 'Lepe', 'Punta Umbría']
+    };
+
+    // ---------- panel slide-up ----------
+    const panel = document.getElementById('panel');
+    const panelTitle = document.getElementById('panel-title');
+    const muniGrid = document.getElementById('muni-grid');
+    const closeBtn = document.getElementById('close-panel');
+
+    function openPanel(prov) {
+      panelTitle.textContent = prov;
+      muniGrid.innerHTML = '';
+      (data[prov] || []).forEach(name => {
+        const card = document.createElement('div');
+        card.innerHTML = `\
+          <div class="w-full h-28 bg-gray-200 rounded-xl mb-1"></div>
+          <span class="block text-center text-sm">${name}</span>`;
+        muniGrid.appendChild(card);
+      });
+      panel.classList.remove('translate-y-full');
+    }
+    function closePanel() {
+      panel.classList.add('translate-y-full');
+    }
+    closeBtn.addEventListener('click', closePanel);
+
+    document.querySelectorAll('.province').forEach(btn => {
+      btn.addEventListener('click', () => openPanel(btn.dataset.prov));
+    });
+  </script>
+</body>
+</html>
