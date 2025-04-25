@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Municipio • Comunidad Energética</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white flex flex-col h-screen px-6 overflow-hidden">
+  <!-- Header -->
+  <header class="flex items-center justify-between h-[5.2rem] mt-1 select-none">
+    <button onclick="history.back()" class="text-3xl leading-none">&larr;</button>
+    <img src="dslogo.jpg" alt="logo" class="h-16" />
+    <div></div>
+  </header>
+
+  <!-- Nombre municipio -->
+  <h1 id="mun-title" class="text-2xl font-bold mb-4">Municipio</h1>
+
+  <!-- Imagen principal -->
+  <div class="w-full h-44 rounded-2xl overflow-hidden mb-5">
+    <img id="mun-img" src="" alt="" class="w-full h-full object-cover">
+  </div>
+
+  <!-- Botón ahorro -->
+  <button id="btn-ahorro" class="mx-auto w-40 h-8 rounded-lg bg-teal-200 text-sm font-medium mb-5">
+    Mis ahorros
+  </button>
+
+  <!-- Descripción -->
+  <p id="mun-desc" class="text-center text-[15px] leading-snug px-1 mb-6">
+    <!-- se rellena vía JS -->
+  </p>
+
+  <!-- CTA -->
+  <button class="mx-auto w-36 h-8 rounded-lg border border-gray-400 text-sm font-medium mb-8">
+    Inscribirme
+  </button>
+
+  <!-- Logo Barbate (o el que toque) -->
+  <img id="mun-logo" src="" alt="" class="mx-auto h-10">
+
+  <script>
+    /* ======  Datos de municipios  ====== */
+    const munData = {
+      "Barbate": {
+        img: "./img/mun/barbate.jpg",
+        desc: "Barbate, situado en la Costa de la Luz, destaca por su tradición pesquera y sus extensas playas. La comunidad energética local impulsa la eficiencia y el autoconsumo renovable.",
+        logo: "./img/logo-mun/barbate.svg"
+      },
+      "El Bosque": {
+        img: "./img/mun/el-bosque.jpg",
+        desc: "Rodeado de un exuberante entorno natural, El Bosque apuesta por la energía fotovoltaica compartida para reducir emisiones y costes de sus vecinos.",
+        logo: "./img/logo-mun/el-bosque.svg"
+      }
+      /* …añade los que necesites… */
+    };
+
+    /* ======  Leer parámetro mun  ====== */
+    const urlParams = new URLSearchParams(window.location.search);
+    const munName   = urlParams.get('mun');
+
+    /* ======  Rellenar plantilla  ====== */
+    const data = munData[munName];
+    if (data) {
+      document.getElementById('mun-title').textContent = munName;
+      document.getElementById('mun-img').src   = data.img;
+      document.getElementById('mun-img').alt   = munName;
+      document.getElementById('mun-desc').textContent = data.desc;
+      document.getElementById('mun-logo').src  = data.logo;
+    } else {
+      // Si llega un municipio sin datos, muestra mensaje básico
+      document.getElementById('mun-title').textContent = munName || 'Municipio';
+      document.getElementById('mun-desc').textContent  = 'Próximamente añadiremos información sobre este municipio.';
+      document.getElementById('mun-logo').remove();
+    }
+  </script>
+</body>
+</html>

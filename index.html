@@ -65,7 +65,6 @@
           </button>
         </div>
       </div>
-      <!-- Páginas 2-4 omitidas para brevedad, mantienen el mismo formato que la página 1 -->
       <!-- Página 2 -->
       <div class="flex-none w-[88%] pr-6 snap-start">
         <div class="grid grid-rows-4 gap-7 h-full">
@@ -207,80 +206,88 @@
     </div>
   </div>
 
+  <!-- ============  SCRIPT  ============ -->
   <script>
-    // indicador de página
-    const pager=document.getElementById('pager');
-    const indicator=document.getElementById('page-indicator');
-    const pages=pager.children.length;
-    function updateIndicator(){
-      const w=pager.children[0].offsetWidth;
-      indicator.textContent=`${Math.round(pager.scrollLeft/w)+1}/${pages}`;
-    }
-    pager.addEventListener('scroll',()=>requestAnimationFrame(updateIndicator));
+    /* ----------  Indicador de página ---------- */
+    const pager = document.getElementById('pager');
+    const indicator = document.getElementById('page-indicator');
+    const pages = pager.children.length;
 
-    // municipios
-    const data={
-      Almeria:['Adra','Níjar','Roquetas de Mar'],
-      Avila:['Arenas de San Pedro','Cebreros'],
-      Badajoz:['Almendralejo','Zafra'],
-      Cadiz:['Barbate','El Bosque','El Gastor','Jimena de la Frontera','Setenil de las Bodegas','Torre Alháquime'],
-      Castellon:['Benicàssim','Peñíscola'],
-      Cordoba:['Lucena','Priego de Córdoba'],
-      Granada:['Granada Capital','Motril'],
-      Guadalajara:['Guadalajara Capital','Sigüenza'],
-      Leon:['León Capital','Astorga'],
-      Malaga:['Málaga','Marbella','Ronda','Antequera'],
-      Murcia:['Murcia Capital','Cartagena'],
-      Palencia:['Palencia Capital','Dueñas'],
-      Sevilla:['Sevilla Capital','Écija','Carmona'],
-      Teruel:['Teruel Capital','Albarracín'],
-      Toledo:['Toledo Capital','Talavera de la Reina'],
-      Valencia:['Valencia Capital','Gandía','Sagunto']
+    function updateIndicator() {
+      const w = pager.children[0].offsetWidth;
+      indicator.textContent = `${Math.round(pager.scrollLeft / w) + 1}/${pages}`;
+    }
+    pager.addEventListener('scroll', () => requestAnimationFrame(updateIndicator));
+
+    /* ----------  Datos de municipios por provincia ---------- */
+    const data = {
+      Almeria: ['Adra', 'Níjar', 'Roquetas de Mar'],
+      Avila: ['Arenas de San Pedro', 'Cebreros'],
+      Badajoz: ['Almendralejo', 'Zafra'],
+      Cadiz: ['Barbate', 'El Bosque', 'El Gastor', 'Jimena de la Frontera', 'Setenil de las Bodegas', 'Torre Alháquime'],
+      Castellon: ['Benicàssim', 'Peñíscola'],
+      Cordoba: ['Lucena', 'Priego de Córdoba'],
+      Granada: ['Granada Capital', 'Motril'],
+      Guadalajara: ['Guadalajara Capital', 'Sigüenza'],
+      Leon: ['León Capital', 'Astorga'],
+      Malaga: ['Málaga', 'Marbella', 'Ronda', 'Antequera'],
+      Murcia: ['Murcia Capital', 'Cartagena'],
+      Palencia: ['Palencia Capital', 'Dueñas'],
+      Sevilla: ['Sevilla Capital', 'Écija', 'Carmona'],
+      Teruel: ['Teruel Capital', 'Albarracín'],
+      Toledo: ['Toledo Capital', 'Talavera de la Reina'],
+      Valencia: ['Valencia Capital', 'Gandía', 'Sagunto']
     };
 
-    // panel slide-up
-    const panel=document.getElementById('panel');
-    const panelTitle=document.getElementById('panel-title');
-    const muniGrid=document.getElementById('muni-grid');
-    const closeBtn=document.getElementById('close-panel');
-    
-    function openPanel(prov){
-      const provinciaKey = prov;
+    /* ----------  Panel slide-up ---------- */
+    const panel = document.getElementById('panel');
+    const panelTitle = document.getElementById('panel-title');
+    const muniGrid = document.getElementById('muni-grid');
+    const closeBtn = document.getElementById('close-panel');
+
+    function openPanel(prov) {
       panelTitle.textContent = prov;
-      muniGrid.innerHTML='';
-      const municipios = data[provinciaKey] || [];
+      muniGrid.innerHTML = '';
+
+      const municipios = data[prov] || [];
+
       if (municipios.length === 0) {
         const noData = document.createElement('div');
         noData.className = 'col-span-2 text-center py-8';
         noData.textContent = 'No hay municipios disponibles';
         muniGrid.appendChild(noData);
       } else {
+        /* --- Cada municipio enlaza a su pantalla propia --- */
         municipios.forEach(name => {
-          const imgName = name.normalize("NFD")
-                              .replace(/[\u0300-\u036f]/g, "")
-                              .replace(/ /g, "-")
-                              .toLowerCase();
+          const imgName = name.normalize('NFD')
+                                .replace(/[\u0300-\u036f]/g, '')
+                                .replace(/ /g, '-')
+                                .toLowerCase();
           const imgPath = `./img/mun/${imgName}.jpg`;
-          const card = document.createElement('div');
-          card.innerHTML = `
+
+          const link = document.createElement('a');
+          link.href = `municipio.html?mun=${encodeURIComponent(name)}`;
+          link.className = 'block';
+
+          link.innerHTML = `
             <div class="w-full h-28 rounded-xl overflow-hidden mb-1">
               <img src="${imgPath}" alt="${name}" class="w-full h-full object-cover">
             </div>
             <span class="block text-center text-sm">${name}</span>
           `;
-          muniGrid.appendChild(card);
+          muniGrid.appendChild(link);
         });
       }
       panel.classList.remove('translate-y-full');
     }
-    
-    function closePanel(){
+
+    function closePanel() {
       panel.classList.add('translate-y-full');
     }
-    
+
     closeBtn.addEventListener('click', closePanel);
     document.querySelectorAll('.province').forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         const provincia = this.getAttribute('data-prov');
         openPanel(provincia);
       });
