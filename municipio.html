@@ -42,19 +42,233 @@
 
   <script>
     /* ======  Datos de municipios  ====== */
-    const munData = {
-      "Barbate": {
-        img: "./img/mun/barbate.jpg",
-        desc: "Barbate, situado en la Costa de la Luz, destaca por su tradición pesquera y sus extensas playas. La comunidad energética local impulsa la eficiencia y el autoconsumo renovable.",
-        logo: "./img/logo-mun/barbate.svg"
-      },
-      "El Bosque": {
-        img: "./img/mun/el-bosque.jpg",
-        desc: "Rodeado de un exuberante entorno natural, El Bosque apuesta por la energía fotovoltaica compartida para reducir emisiones y costes de sus vecinos.",
-        logo: "./img/logo-mun/el-bosque.svg"
-      }
-      /* …añade los que necesites… */
-    };
+    /* ======  Datos de municipios  ====== */
+const munData = {
+
+/* ----------  ALMERÍA ---------- */
+"Oria": {
+  img : "./img/mun/oria.jpg",
+  desc: "Situada en la comarca del Almanzora, Oria impulsa comunidades energéticas para autoconsumo fotovoltaico y bombeo de agua agrícola.",
+  logo: "./img/logo-mun/oria.svg"
+},
+
+/* ----------  ÁVILA ---------- */
+"Cuevas del Valle": {
+  img : "./img/mun/cuevas-del-valle.jpg",
+  desc: "Cuevas del Valle fomenta el autoconsumo colectivo aprovechando cubiertas municipales.",
+  logo: "./img/logo-mun/cuevas-del-valle.svg"
+},
+"Lanzahíta": {
+  img : "./img/mun/lanzahita.jpg",
+  desc: "Lanzahíta promueve el uso de energía solar térmica para edificios públicos y turismo rural.",
+  logo: "./img/logo-mun/lanzahita.svg"
+},
+"Mombeltrán": {
+  img : "./img/mun/mombeltran.jpg",
+  desc: "Mombeltrán instala fotovoltaica comunitaria en tejados tradicionales para reducir emisiones.",
+  logo: "./img/logo-mun/mombeltran.svg"
+},
+"Niharra": {
+  img : "./img/mun/niharra.jpg",
+  desc: "Proyecto de micro-red fotovoltaica para alumbrado y bombeo de agua en Niharra.",
+  logo: "./img/logo-mun/niharra.svg"
+},
+"Padiernos": {
+  img : "./img/mun/padiernos.jpg",
+  desc: "Padiernos combina eficiencia energética en viviendas con una planta solar compartida.",
+  logo: "./img/logo-mun/padiernos.svg"
+},
+"Salobral": {
+  img : "./img/mun/salobral.jpg",
+  desc: "Salobral desarrolla una comunidad energética con autoconsumo y puntos de recarga.",
+  logo: "./img/logo-mun/salobral.svg"
+},
+
+/* ----------  BADAJOZ ---------- */
+"Garlitos": {
+  img : "./img/mun/garlitos.jpg",
+  desc: "Garlitos usa energía fotovoltaica para abastecer instalaciones ganaderas locales.",
+  logo: "./img/logo-mun/garlitos.svg"
+},
+"Olivenza": {
+  img : "./img/mun/olivenza.jpg",
+  desc: "Olivenza impulsa autoconsumo solar y eficiencia en edificios patrimoniales.",
+  logo: "./img/logo-mun/olivenza.svg"
+},
+"Santa Marta de los Barros": {
+  img : "./img/mun/santa-marta-de-los-barros.jpg",
+  desc: "La comunidad energética de Santa Marta integra bombeo solar para regadío vinícola.",
+  logo: "./img/logo-mun/santa-marta-de-los-barros.svg"
+},
+
+/* ----------  CÁDIZ ---------- */
+"Barbate": {
+  img : "./img/mun/barbate.jpg",
+  desc: "Barbate, situado en la Costa de la Luz, destaca por su tradición pesquera y sus extensas playas. La comunidad energética local impulsa la eficiencia y el autoconsumo renovable.",
+  logo: "./img/logo-mun/barbate.svg"
+},
+"El Bosque": {
+  img : "./img/mun/el-bosque.jpg",
+  desc: "Rodeado de un exuberante entorno natural, El Bosque apuesta por la energía fotovoltaica compartida para reducir emisiones y costes de sus vecinos.",
+  logo: "./img/logo-mun/el-bosque.svg"
+},
+"El Gastor": {
+  img : "./img/mun/el-gastor.jpg",
+  desc: "El Gastor, conocido como el «Balcón de los Pueblos Blancos», instala cubiertas solares en edificios públicos y promueve agrivoltaica para olivareros.",
+  logo: "./img/logo-mun/el-gastor.svg"
+},
+"Jimena de la Frontera": {
+  img : "./img/mun/jimena-de-la-frontera.jpg",
+  desc: "Gracias a su entorno natural y su castillo nazarí, Jimena combina turismo sostenible con comunidades energéticas basadas en biomasa y fotovoltaica.",
+  logo: "./img/logo-mun/jimena-de-la-frontera.svg"
+},
+"Setenil de las Bodegas": {
+  img : "./img/mun/setenil-de-las-bodegas.jpg",
+  desc: "El singular casco excavado en la roca favorece instalaciones solares de autoconsumo y puntos de recarga para visitantes de turismo rural.",
+  logo: "./img/logo-mun/setenil-de-las-bodegas.svg"
+},
+"Torre Alháquime": {
+  img : "./img/mun/torre-alhaquime.jpg",
+  desc: "Torre Alháquime impulsa una micro-red que abastece alumbrado público y bombeo de agua mediante energía fotovoltaica comunitaria.",
+  logo: "./img/logo-mun/torre-alhaquime.svg"
+},
+
+/* ----------  CASTELLÓN ---------- */
+"Sant Joan de Moró": {
+  img : "./img/mun/sant-joan-de-moro.jpg",
+  desc: "Sant Joan de Moró implanta autoconsumo colectivo y almacenamiento para pymes cerámicas.",
+  logo: "./img/logo-mun/sant-joan-de-moro.svg"
+},
+
+/* ----------  CÓRDOBA ---------- */
+"Encinas Reales": {
+  img : "./img/mun/encinas-reales.jpg",
+  desc: "Encinas Reales apuesta por comunidades solares para reducir la factura de sus vecinos.",
+  logo: "./img/logo-mun/encinas-reales.svg"
+},
+
+/* ----------  GRANADA ---------- */
+"Baza": {
+  img : "./img/mun/baza.jpg",
+  desc: "Baza promueve una planta fotovoltaica participativa y puntos de recarga para vehículos eléctricos.",
+  logo: "./img/logo-mun/baza.svg"
+},
+"Benamaurel": {
+  img : "./img/mun/benamaurel.jpg",
+  desc: "Benamaurel integra energía solar en cuevas-vivienda y fomenta la movilidad eléctrica.",
+  logo: "./img/logo-mun/benamaurel.svg"
+},
+"Cuevas del Campo": {
+  img : "./img/mun/cuevas-del-campo.jpg",
+  desc: "Cuevas del Campo instala fotovoltaica flotante en balsas de riego para reducir evaporación.",
+  logo: "./img/logo-mun/cuevas-del-campo.svg"
+},
+"Cúllar": {
+  img : "./img/mun/cullar.jpg",
+  desc: "Cúllar desarrolla autoconsumo colectivo y calderas de biomasa para edificios públicos.",
+  logo: "./img/logo-mun/cullar.svg"
+},
+"Fuente Vaqueros": {
+  img : "./img/mun/fuente-vaqueros.jpg",
+  desc: "Lugar natal de Lorca, Fuente Vaqueros une cultura y energía renovable con cubiertas solares.",
+  logo: "./img/logo-mun/fuente-vaqueros.svg"
+},
+"Huéscar": {
+  img : "./img/mun/huescar.jpg",
+  desc: "Huéscar lidera la implantación de geotermia somera y comunidades solares en la comarca.",
+  logo: "./img/logo-mun/huescar.svg"
+},
+
+/* ----------  GUADALAJARA ---------- */
+"El Casar": {
+  img : "./img/mun/el-casar.jpg",
+  desc: "El Casar impulsa la transición energética con grupos de compra colectiva de fotovoltaica.",
+  logo: "./img/logo-mun/el-casar.svg"
+},
+
+/* ----------  LEÓN ---------- */
+"Benavides": {
+  img : "./img/mun/benavides.jpg",
+  desc: "Benavides implementa autoconsumo solar y moderniza redes de alumbrado LED inteligentes.",
+  logo: "./img/logo-mun/benavides.svg"
+},
+"Noceda del Bierzo": {
+  img : "./img/mun/noceda-del-bierzo.jpg",
+  desc: "Noceda impulsa proyectos de biomasa forestal y fotovoltaica comunitaria.",
+  logo: "./img/logo-mun/noceda-del-bierzo.svg"
+},
+"Onzonilla": {
+  img : "./img/mun/onzonilla.jpg",
+  desc: "Onzonilla instala pérgolas solares en zonas deportivas para autoconsumo compartido.",
+  logo: "./img/logo-mun/onzonilla.svg"
+},
+
+/* ----------  MÁLAGA ---------- */
+"Arriate": {
+  img : "./img/mun/arriate.jpg",
+  desc: "Arriate crea comunidades energéticas y fomenta el autoconsumo en bodegas locales.",
+  logo: "./img/logo-mun/arriate.svg"
+},
+"Comares": {
+  img : "./img/mun/comares.jpg",
+  desc: "Comares integra micro-redes solares con baterías para mejorar la resiliencia rural.",
+  logo: "./img/logo-mun/comares.svg"
+},
+"Guaro": {
+  img : "./img/mun/guaro.jpg",
+  desc: "Guaro combina la Fiesta de la Luna Mora con un proyecto de iluminación eficiente y solar.",
+  logo: "./img/logo-mun/guaro.svg"
+},
+
+/* ----------  MURCIA ---------- */
+"Archena": {
+  img : "./img/mun/archena.jpg",
+  desc: "Archena instala fotovoltaica en balnearios y desarrolla comunidades de energía térmica.",
+  logo: "./img/logo-mun/archena.svg"
+},
+
+/* ----------  PALENCIA ---------- */
+"Bárcena de Campos": {
+  img : "./img/mun/barcena-de-campos.jpg",
+  desc: "Bárcena de Campos implanta una red de calor con biomasa para el casco histórico.",
+  logo: "./img/logo-mun/barcena-de-campos.svg"
+},
+"Castrejón de la Peña": {
+  img : "./img/mun/castrejon-de-la-pena.jpg",
+  desc: "Castrejón apuesta por proyectos eólicos de pequeña escala gestionados por la comunidad.",
+  logo: "./img/logo-mun/castrejon-de-la-pena.svg"
+},
+
+/* ----------  SEVILLA ---------- */
+"El Saucejo": {
+  img : "./img/mun/el-saucejo.jpg",
+  desc: "El Saucejo crea autoconsumo colectivo y almacenamiento para su cooperativa olivarera.",
+  logo: "./img/logo-mun/el-saucejo.svg"
+},
+
+/* ----------  TERUEL ---------- */
+"Guadalaviar": {
+  img : "./img/mun/guadalaviar.jpg",
+  desc: "Guadalaviar moderniza sistemas térmicos con calderas de biomasa forestal local.",
+  logo: "./img/logo-mun/guadalaviar.svg"
+},
+
+/* ----------  TOLEDO ---------- */
+"Los Cerralbos": {
+  img : "./img/mun/los-cerralbos.jpg",
+  desc: "Los Cerralbos impulsa instalaciones FV en cooperativas agrícolas y alumbrado eficiente.",
+  logo: "./img/logo-mun/los-cerralbos.svg"
+},
+
+/* ----------  VALENCIA ---------- */
+"L'Énova": {
+  img : "./img/mun/l-enova.jpg",
+  desc: "L'Énova desarrolla pérgolas solares en áreas deportivas y aparcamientos municipales.",
+  logo: "./img/logo-mun/l-enova.svg"
+}
+};
+
+
 
     /* ======  Leer parámetro mun  ====== */
     const urlParams = new URLSearchParams(window.location.search);
