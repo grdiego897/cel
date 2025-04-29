@@ -10,7 +10,10 @@
   <!-- Header -->
   <header class="flex items-center justify-between h-[5.2rem] mt-1 select-none">
     <button onclick="history.back()" class="text-3xl leading-none">&larr;</button>
-    <img src="dslogo.jpg" alt="logo" class="h-16" />
+    <img id="logo"
+     src="dslogo.jpg"
+     alt="logo"
+     class="h-16 cursor-pointer" />
     <div></div>
   </header>
 
@@ -288,6 +291,14 @@ const munData = {
       document.getElementById('mun-desc').textContent  = 'Próximamente añadiremos información sobre este municipio.';
       document.getElementById('mun-logo').remove();
     }
+    document.getElementById('logo')
+        .addEventListener('click', () => {
+          // opcional: si tienes menú lateral, lo cierras
+          if (typeof closeMenu === 'function') closeMenu();
+          // redirige al listado
+          window.location.href = 'index.html';
+        });
+
   </script>
 </body>
 </html>
