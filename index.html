@@ -15,11 +15,53 @@
   <div class="flex flex-col h-screen pl-6 pr-5 overflow-hidden">
     <!-- Header -->
     <header class="flex items-center justify-between h-[5.2rem] mt-1 select-none">
-      <button class="text-5xl leading-none">&#9776;</button>
+      <button id="burger" class="p-1">
+        <img src="./activeburger.png"
+             alt="Abrir menú"
+             class="h-9 w-auto" />
+      </button>
       <img src="dslogo.jpg" alt="logo" class="h-16" />
       <div></div>
     </header>
+        <!-- ========= MENÚ LATERAL ========= -->
+        <aside id="sidebar"
+        class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-40
+               -translate-x-full transition-transform duration-300 flex flex-col
+               rounded-r-2xl overflow-hidden">
+    <div class="h-[5.2rem] flex items-center px-6">
+    <img src="dslogo.jpg" alt="logo" class="h-10" />
+    </div>
 
+    <nav class="flex-1 overflow-y-auto divide-y">
+      <!-- ===== BUSCADOR DE MUNICIPIOS ===== -->
+<div class="p-4 border-b">
+  <div class="relative">
+    <input id="muni-search"
+           type="text"
+           placeholder="Buscar municipio…"
+           class="w-full pl-4 pr-10 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring" />
+    <button id="muni-search-btn"
+            type="button"
+            aria-label="Buscar"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+      🔍
+    </button>
+  </div>
+</div>
+
+<nav class="flex-1 overflow-y-auto divide-y">
+  <!-- tus enlaces aquí -->
+</nav>
+    <a href="https://comunidadenergeticalocal.es/"      class="block px-6 py-4 hover:bg-gray-100">Comunidades Energéticas Locales</a>
+    <a href="https://dsconsultores.es/quienes-somos"      class="block px-6 py-4 hover:bg-gray-100">Quiénes somos</a>
+    <!-- …más enlaces si quieres… -->
+    </nav>
+    </aside>
+
+    <!-- ==== CAPA OSCURA (overlay) ==== -->
+    <div id="overlay"
+    class="fixed inset-0 bg-black/40 backdrop-blur-sm z-30
+        opacity-0 pointer-events-none transition-opacity"></div>
     <h1 class="text-2xl font-bold mt-1 mb-4">Provincias</h1>
 
     <!-- Pager (4 filas, hint a la siguiente página) -->
@@ -221,6 +263,28 @@
     }
     pager.addEventListener('scroll', () => requestAnimationFrame(updateIndicator));
 
+        /* ----------  Menú lateral ---------- */
+    const burger  = document.getElementById('burger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openMenu() {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeMenu() {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    burger.addEventListener('click', openMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
     /* ----------  Datos de municipios por provincia ---------- */
     const data = {
       Almeria: ['Oria'],
@@ -294,6 +358,67 @@
         openPanel(provincia);
       });
     });
+    /* ——— BUSCADOR DE MUNICIPIOS ——— */
+const searchInput = document.getElementById('muni-search');
+const searchBtn   = document.getElementById('muni-search-btn');
+
+function handleSearch() {
+  const term = searchInput.value.trim().toLowerCase();
+  if (!term) return;
+
+  // 1) genera lista de resultados [{prov, name}, …]
+  const results = [];
+  Object.entries(data).forEach(([prov, municipios]) => {
+    municipios.forEach(name => {
+      if (name.toLowerCase().includes(term)) {
+        results.push({ prov, name });
+      }
+    });
+  });
+
+  // 2) rellena el panel con los resultados
+  panelTitle.textContent = `Resultados: “${ searchInput.value }”`;
+  muniGrid.innerHTML = '';
+  if (results.length === 0) {
+    const noData = document.createElement('div');
+    noData.className = 'col-span-2 text-center py-8';
+    noData.textContent = 'No se encontraron municipios';
+    muniGrid.appendChild(noData);
+  } else {
+    results.forEach(({ prov, name }) => {
+      const imgName = name.normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .replace(/ /g, '-')
+                            .toLowerCase();
+      const imgPath = `./img/mun/${ imgName }.jpg`;
+
+      const link = document.createElement('a');
+      link.href = `municipio.html?mun=${ encodeURIComponent(name) }`;
+      link.className = 'block mb-4';
+
+      link.innerHTML = `
+        <div class="w-full h-28 rounded-xl overflow-hidden mb-1">
+          <img src="${ imgPath }" alt="${ name }" class="w-full h-full object-cover">
+        </div>
+        <span class="block text-center text-sm">${ name } — ${ prov }</span>
+      `;
+      muniGrid.appendChild(link);
+    });
+  }
+
+  // 3) abre el panel
+  panel.classList.remove('translate-y-full');
+}
+
+searchBtn.addEventListener('click', handleSearch);
+searchInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    handleSearch();
+    closeMenu();
+  }
+});
+
   </script>
 </body>
 </html>
