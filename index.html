@@ -13,7 +13,7 @@
 </head>
 <body class="bg-white relative">
   <div class="flex flex-col h-screen pl-6 pr-5 overflow-hidden">
-    <!-- Header -->
+    <!-- header -->
     <header class="flex items-center justify-between h-[5.2rem] mt-1 select-none">
       <button id="burger" class="p-1">
         <img src="./activeburger.png"
@@ -25,7 +25,7 @@
       </a>
       <div></div>
     </header>
-        <!-- ========= MENÚ LATERAL ========= -->
+        <!-- menu lateral -->
         <aside id="sidebar"
         class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-40
                -translate-x-full transition-transform duration-300 flex flex-col
@@ -35,7 +35,7 @@
     </div>
 
     <nav class="flex-1 overflow-y-auto divide-y">
-      <!-- ===== BUSCADOR DE MUNICIPIOS ===== -->
+    <!-- buscador de municipios -->
 <div class="p-4 border-b">
   <div class="relative">
     <input id="muni-search"
@@ -52,23 +52,23 @@
 </div>
 
 <nav class="flex-1 overflow-y-auto divide-y">
-  <!-- tus enlaces aquí -->
+    <!-- enlaces -->
 </nav>
     <a href="https://comunidadenergeticalocal.es/"      class="block px-6 py-4 hover:bg-gray-100">Comunidades Energéticas Locales</a>
     <a href="https://dsconsultores.es/quienes-somos"      class="block px-6 py-4 hover:bg-gray-100">Quiénes somos</a>
-    <!-- …más enlaces si quieres… -->
+    <!-- más enlaces  -->
     </nav>
     </aside>
 
-    <!-- ==== CAPA OSCURA (overlay) ==== -->
+    <!-- overlay -->
     <div id="overlay"
     class="fixed inset-0 bg-black/40 backdrop-blur-sm z-30
         opacity-0 pointer-events-none transition-opacity"></div>
     <h1 class="text-2xl font-bold mt-1 mb-4">Provincias</h1>
 
-    <!-- Pager (4 filas, hint a la siguiente página) -->
+    <!-- paginador (4 páginas) -->
     <section id="pager" class="flex-1 flex overflow-x-auto snap-x snap-mandatory hide-scrollbar">
-      <!-- Página 1 -->
+    <!-- página 1 -->
       <div class="flex-none w-[88%] pr-6 snap-start">
         <div class="grid grid-rows-4 gap-7 h-full">
           <!-- Reordenado por número de municipios -->
@@ -110,7 +110,7 @@
           </button>
         </div>
       </div>
-      <!-- Página 2 -->
+    <!-- página 2 -->
       <div class="flex-none w-[88%] pr-6 snap-start">
         <div class="grid grid-rows-4 gap-7 h-full">
           <button class="province flex items-center space-x-5" data-prov="Leon">
@@ -151,7 +151,7 @@
           </button>
         </div>
       </div>
-      <!-- Página 3 -->
+    <!-- página 3 -->
       <div class="flex-none w-[88%] pr-6 snap-start">
         <div class="grid grid-rows-4 gap-7 h-full">
           <button class="province flex items-center space-x-5" data-prov="Castellon">
@@ -192,7 +192,7 @@
           </button>
         </div>
       </div>
-      <!-- Página 4 -->
+    <!-- página 4 -->
       <div class="flex-none w-[88%] pr-6 snap-start">
         <div class="grid grid-rows-4 gap-7 h-full">
           <button class="province flex items-center space-x-5" data-prov="Sevilla">
@@ -241,7 +241,7 @@
     </footer>
   </div>
 
-  <!-- Panel Municipios -->
+  <!-- panel municipios -->
   <div id="panel" class="fixed inset-x-0 top-[5.5rem] bottom-0 translate-y-full transition-transform duration-300 ease-out z-30">
     <div class="h-full bg-gray-100 rounded-t-2xl shadow-xl mx-4 overflow-hidden">
       <div class="relative py-4">
@@ -252,9 +252,9 @@
     </div>
   </div>
 
-  <!-- ============  SCRIPT  ============ -->
+  <!-- script -->
   <script>
-    /* ----------  Indicador de página ---------- */
+    /* indicador de página */
     const pager = document.getElementById('pager');
     const indicator = document.getElementById('page-indicator');
     const pages = pager.children.length;
@@ -265,7 +265,7 @@
     }
     pager.addEventListener('scroll', () => requestAnimationFrame(updateIndicator));
 
-        /* ----------  Menú lateral ---------- */
+        /* menú lateral */
     const burger  = document.getElementById('burger');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
@@ -287,7 +287,7 @@
       if (e.key === 'Escape') closeMenu();
     });
 
-    /* ----------  Datos de municipios por provincia ---------- */
+    /* datos de municipios por provincia */
     const data = {
       Almeria: ['Oria'],
       Avila: ['Cuevas del Valle', 'Lanzahíta', 'Mombeltrán', 'Niharra', 'Padiernos', 'Salobral'],
@@ -307,7 +307,7 @@
       Valencia: ["L'Énova"]
     };
 
-    /* ----------  Panel slide-up ---------- */
+    /* panel deslizable */
     const panel = document.getElementById('panel');
     const panelTitle = document.getElementById('panel-title');
     const muniGrid = document.getElementById('muni-grid');
@@ -325,7 +325,7 @@
         noData.textContent = 'No hay municipios disponibles';
         muniGrid.appendChild(noData);
       } else {
-        /* --- Cada municipio enlaza a su pantalla propia --- */
+    /* cada municipio enlaza a su página */
         municipios.forEach(name => {
           const imgName = name.normalize('NFD')
                                 .replace(/[\u0300-\u036f]/g, '')
@@ -360,7 +360,7 @@
         openPanel(provincia);
       });
     });
-    /* ——— BUSCADOR DE MUNICIPIOS ——— */
+    /* buscador de municipios */
 const searchInput = document.getElementById('muni-search');
 const searchBtn   = document.getElementById('muni-search-btn');
 

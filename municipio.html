@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white flex flex-col h-screen px-6 overflow-hidden">
-  <!-- Header -->
+  <!-- header -->
   <header class="flex items-center justify-between h-[5.2rem] mt-1 select-none">
     <button onclick="history.back()" class="text-3xl leading-none">&larr;</button>
     <img id="logo"
@@ -17,45 +17,44 @@
     <div></div>
   </header>
 
-  <!-- Nombre municipio -->
+  <!-- nombre del municipio -->
   <h1 id="mun-title" class="text-2xl font-bold mb-4">Municipio</h1>
 
-  <!-- Imagen principal -->
+  <!-- imagen principal -->
   <div class="w-full h-44 rounded-2xl overflow-hidden mb-5">
     <img id="mun-img" src="" alt="" class="w-full h-full object-cover">
   </div>
 
-  <!-- Botón ahorro -->
+  <!-- botón ahorro -->
   <button id="btn-ahorro" class="mx-auto w-40 h-8 rounded-lg bg-teal-200 text-sm font-medium mb-5">
     Mis ahorros
   </button>
 
-  <!-- Descripción -->
+  <!-- descripción -->
   <p id="mun-desc" class="text-center text-[15px] leading-snug px-1 mb-6">
     <!-- se rellena vía JS -->
   </p>
 
-  <!-- CTA -->
+  <!-- llamada a la acción -->
   <button class="mx-auto w-36 h-8 rounded-lg border border-gray-400 text-sm font-medium mb-8">
     Inscribirme
   </button>
 
-  <!-- Logo Barbate (o el que toque) -->
+  <!-- logo del municipio -->
   <img id="mun-logo" src="" alt="" class="mx-auto h-10">
 
   <script>
-    /* ======  Datos de municipios  ====== */
-    /* ======  Datos de municipios  ====== */
+    /* datos de municipios */
 const munData = {
 
-/* ----------  ALMERÍA ---------- */
+    /* almería */
 "Oria": {
   img : "./img/mun/oria.jpg",
   desc: "Situada en la comarca del Almanzora, Oria impulsa comunidades energéticas para autoconsumo fotovoltaico y bombeo de agua agrícola.",
   logo: "./img/logo-mun/oria.svg"
 },
 
-/* ----------  ÁVILA ---------- */
+    /* ávila */
 "Cuevas del Valle": {
   img : "./img/mun/cuevas-del-valle.jpg",
   desc: "Cuevas del Valle fomenta el autoconsumo colectivo aprovechando cubiertas municipales.",
@@ -87,7 +86,7 @@ const munData = {
   logo: "./img/logo-mun/salobral.svg"
 },
 
-/* ----------  BADAJOZ ---------- */
+    /* badajoz */
 "Garlitos": {
   img : "./img/mun/garlitos.jpg",
   desc: "Garlitos usa energía fotovoltaica para abastecer instalaciones ganaderas locales.",
@@ -104,7 +103,7 @@ const munData = {
   logo: "./img/logo-mun/santa-marta-de-los-barros.svg"
 },
 
-/* ----------  CÁDIZ ---------- */
+    /* cádiz */
 "Barbate": {
   img : "./img/mun/barbate.jpg",
   desc: "Barbate, situado en la Costa de la Luz, destaca por su tradición pesquera y sus extensas playas. La comunidad energética local impulsa la eficiencia y el autoconsumo renovable.",
@@ -136,21 +135,21 @@ const munData = {
   logo: "./img/logo-mun/torre-alhaquime.svg"
 },
 
-/* ----------  CASTELLÓN ---------- */
+    /* castellón */
 "Sant Joan de Moró": {
   img : "./img/mun/sant-joan-de-moro.jpg",
   desc: "Sant Joan de Moró implanta autoconsumo colectivo y almacenamiento para pymes cerámicas.",
   logo: "./img/logo-mun/sant-joan-de-moro.svg"
 },
 
-/* ----------  CÓRDOBA ---------- */
+    /* córdoba */
 "Encinas Reales": {
   img : "./img/mun/encinas-reales.jpg",
   desc: "Encinas Reales apuesta por comunidades solares para reducir la factura de sus vecinos.",
   logo: "./img/logo-mun/encinas-reales.svg"
 },
 
-/* ----------  GRANADA ---------- */
+    /* granada */
 "Baza": {
   img : "./img/mun/baza.jpg",
   desc: "Baza promueve una planta fotovoltaica participativa y puntos de recarga para vehículos eléctricos.",
@@ -182,14 +181,14 @@ const munData = {
   logo: "./img/logo-mun/huescar.svg"
 },
 
-/* ----------  GUADALAJARA ---------- */
+    /* guadalajara */
 "El Casar": {
   img : "./img/mun/el-casar.jpg",
   desc: "El Casar impulsa la transición energética con grupos de compra colectiva de fotovoltaica.",
   logo: "./img/logo-mun/el-casar.svg"
 },
 
-/* ----------  LEÓN ---------- */
+    /* león */
 "Benavides": {
   img : "./img/mun/benavides.jpg",
   desc: "Benavides implementa autoconsumo solar y moderniza redes de alumbrado LED inteligentes.",
@@ -206,7 +205,7 @@ const munData = {
   logo: "./img/logo-mun/onzonilla.svg"
 },
 
-/* ----------  MÁLAGA ---------- */
+    /* málaga */
 "Arriate": {
   img : "./img/mun/arriate.jpg",
   desc: "Arriate crea comunidades energéticas y fomenta el autoconsumo en bodegas locales.",
@@ -223,14 +222,14 @@ const munData = {
   logo: "./img/logo-mun/guaro.svg"
 },
 
-/* ----------  MURCIA ---------- */
+    /* murcia */
 "Archena": {
   img : "./img/mun/archena.jpg",
   desc: "Archena instala fotovoltaica en balnearios y desarrolla comunidades de energía térmica.",
   logo: "./img/logo-mun/archena.svg"
 },
 
-/* ----------  PALENCIA ---------- */
+    /* palencia */
 "Bárcena de Campos": {
   img : "./img/mun/barcena-de-campos.jpg",
   desc: "Bárcena de Campos implanta una red de calor con biomasa para el casco histórico.",
@@ -242,28 +241,28 @@ const munData = {
   logo: "./img/logo-mun/castrejon-de-la-pena.svg"
 },
 
-/* ----------  SEVILLA ---------- */
+    /* sevilla */
 "El Saucejo": {
   img : "./img/mun/el-saucejo.jpg",
   desc: "El Saucejo crea autoconsumo colectivo y almacenamiento para su cooperativa olivarera.",
   logo: "./img/logo-mun/el-saucejo.svg"
 },
 
-/* ----------  TERUEL ---------- */
+    /* teruel */
 "Guadalaviar": {
   img : "./img/mun/guadalaviar.jpg",
   desc: "Guadalaviar moderniza sistemas térmicos con calderas de biomasa forestal local.",
   logo: "./img/logo-mun/guadalaviar.svg"
 },
 
-/* ----------  TOLEDO ---------- */
+    /* toledo */
 "Los Cerralbos": {
   img : "./img/mun/los-cerralbos.jpg",
   desc: "Los Cerralbos impulsa instalaciones FV en cooperativas agrícolas y alumbrado eficiente.",
   logo: "./img/logo-mun/los-cerralbos.svg"
 },
 
-/* ----------  VALENCIA ---------- */
+    /* valencia */
 "L'Énova": {
   img : "./img/mun/l-enova.jpg",
   desc: "L'Énova desarrolla pérgolas solares en áreas deportivas y aparcamientos municipales.",
@@ -273,11 +272,11 @@ const munData = {
 
 
 
-    /* ======  Leer parámetro mun  ====== */
+    /* leer parámetro mun */
     const urlParams = new URLSearchParams(window.location.search);
     const munName   = urlParams.get('mun');
 
-    /* ======  Rellenar plantilla  ====== */
+    /* rellenar plantilla */
     const data = munData[munName];
     if (data) {
       document.getElementById('mun-title').textContent = munName;
