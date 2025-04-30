@@ -412,7 +412,10 @@ function handleSearch() {
   panel.classList.remove('translate-y-full');
 }
 
-searchBtn.addEventListener('click', handleSearch);
+searchBtn.addEventListener('click', () => {
+    handleSearch();   
+    closeMenu();      
+  });
 searchInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
     e.preventDefault();
