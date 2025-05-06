@@ -9,10 +9,40 @@
   <style>
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Desktop panel bottom-up overlay */
+    @media (min-width: 1024px) {
+      #panel {
+        position: fixed;
+        width: 50%;
+        left: 50%;
+        right: auto;
+        bottom: 0;
+        top: 5.5rem; /* height of header */
+        height: calc(100vh - 5.5rem);
+        border-radius: 1rem 1rem 0 0;
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+        background-color: #f3f4f6; /* gray-100 */
+        overflow: hidden;
+        transform: translateY(100%) translateX(-50%);
+        transition: transform 0.3s ease-out;
+        z-index: 30;
+      }
+      #panel.open {
+        transform: translateY(0) translateX(-50%);
+      }
+      #close-panel {
+        display: block;
+        position: absolute;
+        right: 1.5rem;
+        top: 1rem;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body class="bg-white relative">
-  <div class="flex flex-col h-screen pl-6 pr-5 overflow-hidden">
+  <div class="flex flex-col h-screen pl-6 pr-5 overflow-hidden lg:pl-20 lg:pr-10">
     <!-- header -->
     <header class="flex items-center justify-between h-[5.2rem] mt-1 select-none">
       <button id="burger" class="p-1">
@@ -67,10 +97,10 @@
     <h1 class="text-2xl font-bold mt-1 mb-4">Provincias</h1>
 
     <!-- paginador (4 páginas) -->
-    <section id="pager" class="flex-1 flex overflow-x-auto snap-x snap-mandatory hide-scrollbar">
+    <section id="pager" class="flex-1 flex overflow-x-auto snap-x snap-mandatory hide-scrollbar lg:grid lg:grid-cols-4 lg:overflow-visible lg:snap-none">
     <!-- página 1 -->
-      <div class="flex-none w-[88%] pr-6 snap-start">
-        <div class="grid grid-rows-4 gap-7 h-full">
+      <div class="flex-none w-[88%] pr-6 snap-start lg:w-auto lg:pr-0">
+        <div class="grid grid-rows-4 gap-7 h-full lg:grid-rows-none lg:grid-cols-1">
           <!-- Reordenado por número de municipios -->
           <button class="province flex items-center space-x-5" data-prov="Avila">
             <div class="w-28 h-28 rounded-2xl overflow-hidden">
@@ -242,13 +272,13 @@
   </div>
 
   <!-- panel municipios -->
-  <div id="panel" class="fixed inset-x-0 top-[5.5rem] bottom-0 translate-y-full transition-transform duration-300 ease-out z-30">
-    <div class="h-full bg-gray-100 rounded-t-2xl shadow-xl mx-4 overflow-hidden">
+  <div id="panel" class="fixed inset-x-0 bottom-0 translate-y-full transition-transform duration-300 ease-out z-30 lg:fixed lg:bottom-0 lg:left-0 lg:right-0 lg:top-[5.5rem] lg:h-[calc(100vh-5.5rem)] lg:translate-y-full lg:rounded-t-2xl lg:shadow-xl lg:bg-gray-100 lg:mx-4 lg:overflow-hidden">
+    <div class="h-full bg-gray-100 rounded-t-2xl shadow-xl mx-4 overflow-hidden lg:mx-0 lg:rounded-none">
       <div class="relative py-4">
         <h2 id="panel-title" class="text-xl font-semibold text-center">Provincia</h2>
-        <button id="close-panel" class="text-2xl absolute right-4 top-1/2 -translate-y-1/2">&#9660;</button>
+        <button id="close-panel" class="text-2xl absolute right-4 top-1/2 -translate-y-1/2 lg:hidden">&#9660;</button>
       </div>
-      <div id="muni-grid" class="grid grid-cols-2 gap-4 px-4 pb-6 overflow-y-auto hide-scrollbar h-[calc(100%-4rem)]"></div>
+      <div id="muni-grid" class="grid grid-cols-2 gap-4 px-4 pb-6 overflow-y-auto hide-scrollbar h-[calc(100%-4rem)] lg:grid-cols-1"></div>
     </div>
   </div>
 
@@ -265,22 +295,38 @@
     }
     pager.addEventListener('scroll', () => requestAnimationFrame(updateIndicator));
 
-        /* menú lateral */
+    /* menú lateral */
     const burger  = document.getElementById('burger');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
+    const sidebarLogo = sidebar.querySelector('img[alt="logo"]');
 
     function openMenu() {
       sidebar.classList.remove('-translate-x-full');
       overlay.classList.remove('opacity-0', 'pointer-events-none');
+      overlay.style.display = 'block';
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = 'hidden';
     }
 
     function closeMenu() {
       sidebar.classList.add('-translate-x-full');
       overlay.classList.add('opacity-0', 'pointer-events-none');
+      overlay.style.display = 'none';
+      // Restore body scroll when menu is closed
+      document.body.style.overflow = '';
     }
 
-    burger.addEventListener('click', openMenu);
+    function toggleMenu() {
+      if (sidebar.classList.contains('-translate-x-full')) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    }
+
+    burger.addEventListener('click', toggleMenu);
+    sidebarLogo.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', closeMenu);
 
     document.addEventListener('keydown', e => {
@@ -346,20 +392,57 @@
           muniGrid.appendChild(link);
         });
       }
-      panel.classList.remove('translate-y-full');
+      if (window.innerWidth >= 1024) {
+        panel.classList.add('open');
+      } else {
+        panel.classList.remove('translate-y-full');
+      }
+      updateCloseBtnIcon();
     }
 
     function closePanel() {
-      panel.classList.add('translate-y-full');
+      if (window.innerWidth >= 1024) {
+        panel.classList.remove('open');
+      } else {
+        panel.classList.add('translate-y-full');
+      }
+      updateCloseBtnIcon();
     }
 
-    closeBtn.addEventListener('click', closePanel);
-    document.querySelectorAll('.province').forEach(btn => {
-      btn.addEventListener('click', function () {
-        const provincia = this.getAttribute('data-prov');
-        openPanel(provincia);
-      });
-    });
+    function togglePanel() {
+      if (window.innerWidth >= 1024) {
+        if (panel.classList.contains('open')) {
+          panel.classList.remove('open');
+        } else {
+          panel.classList.add('open');
+        }
+      } else {
+        if (panel.classList.contains('translate-y-full')) {
+          panel.classList.remove('translate-y-full');
+        } else {
+          panel.classList.add('translate-y-full');
+        }
+      }
+      updateCloseBtnIcon();
+    }
+
+    function updateCloseBtnIcon() {
+      if (panel.classList.contains('translate-y-full')) {
+        closeBtn.innerHTML = '&#9650;'; // up arrow
+      } else {
+        closeBtn.innerHTML = '&#9660;'; // down arrow
+      }
+    }
+
+    closeBtn.addEventListener('click', togglePanel);
+    
+  document.querySelectorAll('.province').forEach(btn => {
+  btn.addEventListener('click', function () {
+    const provincia = this.getAttribute('data-prov');
+    openPanel(provincia);
+  });
+});
+
     /* buscador de municipios */
 const searchInput = document.getElementById('muni-search');
 const searchBtn   = document.getElementById('muni-search-btn');
