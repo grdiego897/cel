@@ -10,7 +10,7 @@
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Desktop panel bottom-up overlay */
+    /* Modo escritorio */
     @media (min-width: 1024px) {
       #panel {
         position: fixed;
@@ -18,11 +18,11 @@
         left: 50%;
         right: auto;
         bottom: 0;
-        top: 5.5rem; /* height of header */
+        top: 5.5rem; 
         height: calc(100vh - 5.5rem);
         border-radius: 1rem 1rem 0 0;
         box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
-        background-color: #f3f4f6; /* gray-100 */
+        background-color: #f3f4f6; 
         overflow: hidden;
         transform: translateY(100%) translateX(-50%);
         transition: transform 0.3s ease-out;
@@ -305,7 +305,7 @@
       sidebar.classList.remove('-translate-x-full');
       overlay.classList.remove('opacity-0', 'pointer-events-none');
       overlay.style.display = 'block';
-      // Prevent body scroll when menu is open
+      // Cuando el menu este abierto, que no se mueva el body
       document.body.style.overflow = 'hidden';
     }
 
@@ -313,7 +313,7 @@
       sidebar.classList.add('-translate-x-full');
       overlay.classList.add('opacity-0', 'pointer-events-none');
       overlay.style.display = 'none';
-      // Restore body scroll when menu is closed
+      // Restaurar scroll del body cuando el menu se cierra
       document.body.style.overflow = '';
     }
 
@@ -428,9 +428,9 @@
 
     function updateCloseBtnIcon() {
       if (panel.classList.contains('translate-y-full')) {
-        closeBtn.innerHTML = '&#9650;'; // up arrow
+        closeBtn.innerHTML = '&#9650;'; // flecha arriba
       } else {
-        closeBtn.innerHTML = '&#9660;'; // down arrow
+        closeBtn.innerHTML = '&#9660;'; // flecha abajo
       }
     }
 
@@ -451,7 +451,7 @@ function handleSearch() {
   const term = searchInput.value.trim().toLowerCase();
   if (!term) return;
 
-  // 1) genera lista de resultados [{prov, name}, …]
+  // 1) genera lista de resultados
   const results = [];
   Object.entries(data).forEach(([prov, municipios]) => {
     municipios.forEach(name => {
