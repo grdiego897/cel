@@ -59,7 +59,11 @@
   <form id="form" class="fixed bottom-3 left-0 right-0 px-2 pb-[env(safe-area-inset-bottom)] pt-2 bg-white/90 backdrop-blur-sm flex flex-col gap-3 md:static md:bg-transparent md:px-4 md:pb-6 md:pt-0">
 
     <!-- acciones rápidas -->
-    <section id="quick-actions" class="grid grid-cols-3 place-items-center gap-2 md:gap-4 md:max-w-lg md:mx-auto">
+    <section id="quick-actions"
+    class="flex flex-wrap justify-center
+           space-x-[2rem]     /* móvil */
+           md:space-x-[2rem]  /* escritorio */
+           mx-auto max-w-full">
       <button type="button" data-quick="Mis ahorros" class="bg-gray-200 hover:bg-gray-300 active:bg-gray-300/90 transition rounded-2xl flex flex-col items-center justify-center w-20 h-20 text-[11px] gap-1 md:w-24 md:h-24 md:gap-2">
         <span class="text-lg md:text-2xl">🐷</span>
         <span class="leading-tight text-center">Mis ahorros</span>
@@ -75,7 +79,18 @@
     </section>
 
     <!-- caja de texto -->
-    <input id="input" type="text" placeholder="¿Qué quieres saber?" autocomplete="off" class="w-full bg-gray-200 rounded-2xl px-5 py-7 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-300 md:max-w-lg md:mx-auto placeholder:text-gray-500" />
+    <input id="input" type="text" placeholder="¿Qué quieres saber?" autocomplete="off" class="w-full
+    bg-gray-200
+    rounded-2xl
+    px-5
+    py-9
+    text-sm
+    focus:outline-none
+    focus:ring-2
+    focus:ring-emerald-300
+    md:max-w-lg
+    md:mx-auto
+    placeholder:text-gray-500" />
   </form>
 
   <script>
@@ -147,7 +162,7 @@
         addBubble(data.reply, 'bot');
       } catch (err) {
         console.error(err);
-        addBubble('Integrar backend', 'bot');
+        addBubble('Lo siento, todavía no puedo procesar tu pregunta.', 'bot');
       } finally {
         toggleInput(true);
       }
