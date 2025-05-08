@@ -44,17 +44,25 @@
 <body class="bg-white relative">
   <div class="flex flex-col h-screen pl-6 pr-5 overflow-hidden lg:pl-20 lg:pr-10">
     <!-- header -->
-    <header class="flex items-center justify-between h-[5.2rem] mt-1 select-none">
-      <button id="burger" class="p-1">
-        <img src="./activeburger.png"
-             alt="Abrir menú"
-             class="h-9 w-auto" />
+    <header class="relative flex items-center justify-center h-[5.2rem] mt-1 select-none">
+      <!-- left button anchored -->
+      <button id="burger" class="absolute left-0 p-1">
+        <img src="./activeburger.png" alt="Abrir menú" class="h-9 w-auto" />
       </button>
-      <a href="index.html" aria-label="Volver a Provincias">
-      <img src="dslogo.jpg" alt="Logo DS" class="h-16 cursor-pointer" />
+    
+      <!-- perfectly centred logo -->
+      <a href="index.html" aria-label="Volver a Provincias" class="mx-auto">
+        <img src="dslogo.jpg" alt="Logo DS" class="h-16 cursor-pointer" />
       </a>
-      <div></div>
+    
+      <!-- right button anchored -->
+      <button id="chatbot-btn"
+              aria-label="Abrir chatbot"
+              class="absolute right-0 p-1 rounded-full bg-white ring-2 ring-gray-300/60 shadow-lg hover:bg-gray-100 transition active:scale-95">
+        <img id="chatbot-icon" src="chatbot.png" alt="Chatbot" class="h-12 w-12 object-contain pointer-events-none" />
+      </button>
     </header>
+    
         <!-- menu lateral -->
         <aside id="sidebar"
         class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-40
@@ -294,6 +302,37 @@
       indicator.textContent = `${Math.round(pager.scrollLeft / w) + 1}/${pages}`;
     }
     pager.addEventListener('scroll', () => requestAnimationFrame(updateIndicator));
+
+    /* chatbot */
+    const chatbotBtn  = document.getElementById('chatbot-btn');
+    const chatbotIcon = document.getElementById('chatbot-icon');
+
+    // Ruta de las dos versiones
+    const ICON_IDLE = 'chatbot.png';      // Estado normal
+    const ICON_WINK = 'chatbotwink.png';  // Guiño
+
+    // Helper: cambia la imagen
+    const showIcon = (src) => { chatbotIcon.src = src; };
+
+    // ---------------- Hover ----------------
+    chatbotBtn.addEventListener('mouseenter', () => showIcon(ICON_WINK));
+    chatbotBtn.addEventListener('mouseleave', () => showIcon(ICON_IDLE));
+
+    // ------------ Press feedback -----------
+    chatbotBtn.addEventListener('mousedown', () => showIcon(ICON_WINK));
+    chatbotBtn.addEventListener('touchstart', () => showIcon(ICON_WINK), { passive: true });
+
+    // ------------- Click / tap -------------
+    chatbotBtn.addEventListener('click', () => {
+      // Aseguramos que quede en guiño
+      showIcon(ICON_WINK);
+
+      // Tras 1 s redirigimos a la página del chatbot
+      setTimeout(() => {
+        window.location.href = 'chatbot.html';
+      }, 500); // 1000 ms = 1 s
+    });
+
 
     /* menú lateral */
     const burger  = document.getElementById('burger');

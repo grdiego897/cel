@@ -342,7 +342,7 @@ const munData = {
       "Villamartín": "https://aecastillomatrera.com/#formulario"
     };
 
-    // Add click event listener to the Inscribirme button
+    // listener de click para inscribirme
     const inscribirmeBtn = document.getElementById('btn-inscribirme');
     if (inscribirmeBtn) {
       inscribirmeBtn.addEventListener('click', () => {
@@ -350,7 +350,6 @@ const munData = {
         if (url) {
           window.location.href = url;
         } else {
-          // Optional: alert or no action if municipality not in the list
           console.warn('No redirection URL defined for this municipality.');
         }
       });

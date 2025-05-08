@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Chatbot • DS Consultores</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="dslogo-transparente.png" />
+  <style>
+    /* Oculta la barra de scroll nativa en móviles */
+    #chat::-webkit-scrollbar { display: none; }
+    #chat { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Fallback para navegadores que no soporten las clases sticky de Tailwind (p.ej. Safari viejo) */
+    header { position: sticky; top: 0; }
+  </style>
+</head>
+<body class="bg-white flex flex-col min-h-screen select-none relative">
+  <!-- Header: ahora sticky ✓ -->
+  <header class="sticky top-0 z-50 flex items-center justify-center h-[5.2rem] select-none shadow-sm bg-white">
+      <!-- left button anchored -->
+      <button id="burger" class="absolute left-4 p-1">
+        <img src="./activeburger.png" alt="Abrir menú" class="h-9 w-auto" />
+      </button>
+      
+      <!-- perfectly centred logo -->
+      <a href="index.html" aria-label="Volver a Inicio" class="mx-auto">
+        <img src="dslogo.jpg" alt="Logo DS" class="h-16 cursor-pointer" />
+      </a>
+      
+      <!-- right button anchored -->
+      <button id="chatbot-btn"
+              aria-label="Abrir chatbot"
+              class="absolute right-4 p-1 rounded-full bg-white ring-2 ring-gray-300/60 shadow-lg hover:bg-gray-100 transition active:scale-95">
+        <img id="chatbot-icon" src="chatbot.png" alt="Chatbot" class="h-12 w-12 object-contain pointer-events-none" />
+      </button>
+  </header>
+
+  <!-- Menú lateral (mismo que index.html) -->
+  <aside id="sidebar"
+         class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-40
+                -translate-x-full transition-transform duration-300 flex flex-col
+                rounded-r-2xl overflow-hidden">
+      <div class="h-[5.2rem] flex items-center px-6">
+        <img src="dslogo.jpg" alt="logo" class="h-10" />
+      </div>
+      <nav class="flex-1 overflow-y-auto divide-y">
+        <a href="https://comunidadenergeticalocal.es/" class="block px-6 py-4 hover:bg-gray-100">Comunidades Energéticas Locales</a>
+        <a href="https://dsconsultores.es/quienes-somos" class="block px-6 py-4 hover:bg-gray-100">Quiénes somos</a>
+        <!-- más enlaces -->
+      </nav>
+  </aside>
+
+  <!-- Overlay -->
+  <div id="overlay"
+       class="fixed inset-0 bg-black/40 backdrop-blur-sm z-30
+              opacity-0 pointer-events-none transition-opacity"></div>
+
+  <!-- Chat viewport -->
+  <main id="chat" class="flex-1 flex flex-col gap-1 px-4 pt-4 overflow-y-auto">
+    <!-- Burbuja de bienvenida -->
+    <div class="max-w-[70%] self-start bg-gray-200 text-gray-800 text-sm px-4 py-2 rounded-2xl shadow">
+      Bienvenido al nuevo chatbot de DS. ¿En qué puedo ayudarle?
+    </div>
+  </main>
+
+  <!-- Quick actions -->
+  <section class="grid grid-cols-3 gap-2 px-4 pb-4 md:gap-6 md:place-items-center md:max-w-lg md:mx-auto">
+    <button data-quick="Mis ahorros" class="bg-gray-100 hover:bg-gray-200 active:bg-gray-300 transition rounded-xl py-2 text-xs flex flex-col items-center gap-1 md:w-24 md:h-24 md:py-4 md:text-sm md:gap-2 md:justify-center">
+      <span class="text-lg md:text-2xl">🐷</span>
+      <span class="leading-tight text-center">Mis ahorros</span>
+    </button>
+    <button data-quick="Legislación actual" class="bg-gray-100 hover:bg-gray-200 active:bg-gray-300 transition rounded-xl py-2 text-xs flex flex-col items-center gap-1 md:w-24 md:h-24 md:py-4 md:text-sm md:gap-2 md:justify-center">
+      <span class="text-lg md:text-2xl">⚖️</span>
+      <span class="leading-tight text-center">Legislación<br>actual</span>
+    </button>
+    <button data-quick="Nuevas convocatorias" class="bg-gray-100 hover:bg-gray-200 active:bg-gray-300 transition rounded-xl py-2 text-xs flex flex-col items-center gap-1 md:w-24 md:h-24 md:py-4 md:text-sm md:gap-2 md:justify-center">
+      <span class="text-lg md:text-2xl">📣</span>
+      <span class="leading-tight text-center">Nuevas<br>convocatorias</span>
+    </button>
+  </section>
+
+  <!-- Input -->
+  <form id="form" class="px-4 pb-6">
+    <input id="input" type="text" placeholder="¿Qué quieres saber?" autocomplete="off" class="w-full bg-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-300" />
+  </form>
+
+  <script>
+    /* ------------------- Helpers de UI ------------------- */
+    const chat   = document.getElementById('chat');
+    const form   = document.getElementById('form');
+    const input  = document.getElementById('input');
+    const scrollBottom = () => chat.scrollTop = chat.scrollHeight;
+
+    function addBubble(message, from = 'bot') {
+      const div = document.createElement('div');
+      div.textContent = message;
+      div.className = `max-w-[70%] text-sm px-4 py-2 rounded-2xl shadow my-1 ${from === 'user' ? 'self-end bg-emerald-500 text-white' : 'self-start bg-gray-200 text-gray-800'}`;
+      chat.appendChild(div);
+      scrollBottom();
+    }
+
+    function toggleInput(enabled) {
+      input.disabled = !enabled;
+      if (enabled) {
+        input.placeholder = '¿Qué quieres saber?';
+        input.focus();
+      } else {
+        input.placeholder = '💭 Pensando...';
+      }
+    }
+
+    /* ------------------- Menú hamburguesa ------------------- */
+    const burger  = document.getElementById('burger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const sidebarLogo = sidebar.querySelector('img[alt="logo"]');
+
+    function openMenu() {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+      overlay.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      overlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function toggleMenu() {
+      if (sidebar.classList.contains('-translate-x-full')) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    }
+
+    burger.addEventListener('click', toggleMenu);
+    sidebarLogo.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    /* ------------------- Backend IA ------------------- */
+    async function sendMessageToAI(userText) {
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userText })
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        addBubble(data.reply, 'bot');
+      } catch (err) {
+        console.error(err);
+        addBubble('Integrar backend', 'bot');
+      } finally {
+        toggleInput(true);
+      }
+    }
+
+    /* ------------------- Envío de mensajes ------------------- */
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      addBubble(text, 'user');
+      input.value = '';
+      toggleInput(false);
+      await sendMessageToAI(text);
+    });
+
+    /* Acciones rápidas */
+    document.querySelectorAll('[data-quick]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        input.value = btn.dataset.quick;
+        form.dispatchEvent(new Event('submit'));
+      });
+    });
+
+    // Auto-scroll inicial
+    scrollBottom();
+  </script>
+</body>
+</html>
