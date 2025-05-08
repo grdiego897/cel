@@ -62,7 +62,7 @@
   <!-- vista del chat -->
   <main id="chat" class="flex-1 flex flex-col gap-1 px-4 pt-4 overflow-y-auto">
     <!-- Burbuja de bienvenida -->
-    <div class="max-w-[70%] self-start bg-gray-200 text-gray-800 text-sm px-4 py-2 rounded-2xl shadow">
+    <div class="max-w-[70%] self-start bg-gray-200 text-gray-800 text[1rem] px-4 py-2 rounded-2xl shadow">
       Bienvenido al nuevo chatbot de DS. ¿En qué puedo ayudarle?
     </div>
   </main>
@@ -120,7 +120,7 @@
     rounded-2xl
     px-5
     py-9
-    text-sm
+    text[1.2rem]
     focus:outline-none
     focus:ring-2
     focus:ring-emerald-300
@@ -147,7 +147,7 @@
     function addBubble(message, from = 'bot') {
       const div = document.createElement('div');
       div.textContent = message;
-      div.className = `max-w-[70%] whitespace-pre-line text-sm px-4 py-2 rounded-2xl shadow my-1 ${from === 'user' ? 'self-end bg-emerald-500 text-white' : 'self-start bg-gray-200 text-gray-800'}`;
+      div.className = `max-w-[70%] whitespace-pre-line text-[1rem] px-4 py-2 rounded-2xl shadow my-1 ${from === 'user' ? 'self-end bg-emerald-500 text-white' : 'self-start bg-gray-200 text-gray-800'}`;
       chat.appendChild(div);
       scrollBottom();
     }
