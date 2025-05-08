@@ -38,6 +38,11 @@
         top: 1rem;
         transform: none;
       }
+      @media (min-width: 1024px) {
+      /* ocultar indicador de paginas en escritorio */
+      #page-indicator { display: none; 
+      }
+    }
     }
   </style>
 </head>
@@ -78,7 +83,7 @@
   <div class="relative">
     <input id="muni-search"
            type="text"
-           placeholder="buscar municipio…"
+           placeholder="Buscar municipio…"
            class="w-full pl-4 pr-10 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring" />
     <button id="muni-search-btn"
             type="button"
@@ -92,8 +97,11 @@
 <nav class="flex-1 overflow-y-auto divide-y">
     <!-- enlaces -->
 </nav>
-    <a href="https://comunidadenergeticalocal.es/"      class="block px-6 py-4 hover:bg-gray-100">comunidades energéticas locales</a>
-    <a href="https://dsconsultores.es/quienes-somos"      class="block px-6 py-4 hover:bg-gray-100">quiénes somos</a>
+    <a href="index.html"      class="block px-6 py-4 hover:bg-gray-100">Inicio</a>
+    <a href="https://comunidadenergeticalocal.es/"      class="block px-6 py-4 hover:bg-gray-100">Comunidades Energéticas Locales</a>
+    <a href="chatbot.html"      class="block px-6 py-4 hover:bg-gray-100">Chatbot</a>
+    <a href="https://dsconsultores.es/quienes-somos"      class="block px-6 py-4 hover:bg-gray-100">Quiénes somos</a>
+    
     <!-- mas enlaces  -->
     </nav>
     </aside>
@@ -102,7 +110,7 @@
     <div id="overlay"
     class="fixed inset-0 bg-black/40 backdrop-blur-sm z-30
         opacity-0 pointer-events-none transition-opacity"></div>
-    <h1 class="text-2xl font-bold mt-1 mb-4">provincias</h1>
+    <h1 class="text-2xl font-bold mt-1 mb-4">Provincias</h1>
 
     <!-- paginador 4 páginas -->
     <section id="pager" class="flex-1 flex overflow-x-auto snap-x snap-mandatory hide-scrollbar lg:grid lg:grid-cols-4 lg:overflow-visible lg:snap-none">
