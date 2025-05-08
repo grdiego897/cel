@@ -4,6 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Provincias • Comunidad Energética</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roobert:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            roobert: ['"Roobert"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="dslogo-transparente.png" />
   <style>
@@ -46,7 +58,7 @@
     }
   </style>
 </head>
-<body class="bg-white relative">
+<body class="bg-white relative font-roobert bg-white relative">
   <div class="flex flex-col h-screen pl-6 pr-5 overflow-hidden lg:pl-20 lg:pr-10">
     <!-- encabezado -->
     <header class="relative flex items-center justify-center h-[5.2rem] mt-1 select-none">

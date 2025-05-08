@@ -5,6 +5,18 @@
   <!-- ajuste de dimension de pantalla -->
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Chatbot • DS Consultores</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roobert:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            roobert: ['"Roobert"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="dslogo-transparente.png" />
   <style>
@@ -16,7 +28,7 @@
     header { position: sticky; top: 0; }
   </style>
 </head>
-<body class="bg-white flex flex-col min-h-screen select-none relative">
+<body class="bg-white flex flex-col min-h-screen select-none relative font-roobert bg-white relative">
     <!-- header -->
   <header class="sticky top-0 z-50 flex items-center justify-center h-[5.2rem] select-none shadow-sm bg-white">
     <button id="burger" class="absolute left-4 p-1">
@@ -64,18 +76,42 @@
            space-x-[2rem]     /* móvil */
            md:space-x-[2rem]  /* escritorio */
            mx-auto max-w-full">
-      <button type="button" data-quick="Mis ahorros" class="bg-gray-200 hover:bg-gray-300 active:bg-gray-300/90 transition rounded-2xl flex flex-col items-center justify-center w-20 h-20 text-[11px] gap-1 md:w-24 md:h-24 md:gap-2">
-        <span class="text-lg md:text-2xl">🐷</span>
-        <span class="leading-tight text-center">Mis ahorros</span>
-      </button>
-      <button type="button" data-quick="Legislación actual" class="bg-gray-200 hover:bg-gray-300 active:bg-gray-300/90 transition rounded-2xl flex flex-col items-center justify-center w-20 h-20 text-[11px] gap-1 md:w-24 md:h-24 md:gap-2">
-        <span class="text-lg md:text-2xl">⚖️</span>
-        <span class="leading-tight text-center">Legislación<br>actual</span>
-      </button>
-      <button type="button" data-quick="Nuevas convocatorias" class="bg-gray-200 hover:bg-gray-300 active:bg-gray-300/90 transition rounded-2xl flex flex-col items-center justify-center w-20 h-20 text-[11px] gap-1 md:w-24 md:h-24 md:gap-2">
-        <span class="text-lg md:text-2xl">📣</span>
-        <span class="leading-tight text-center">Nuevas<br>convocatorias</span>
-      </button>
+           <button type="button" data-quick="Mis ahorros"
+           class="bg-gray-200 hover:bg-gray-300 active:bg-gray-300/90
+                  transition rounded-2xl flex flex-col items-center justify-center
+                  w-20 h-20 text-[11px] gap-1 md:w-24 md:h-24 md:gap-2">
+           <img
+             src="ahorro.png"
+             alt="Mis ahorros"
+             class="w-6 h-6 md:w-8 md:h-8 object-contain"
+           />
+           <span class="leading-tight text-center">Mis ahorros</span>
+         </button>
+         
+         <button type="button" data-quick="Legislación actual"
+           class="bg-gray-200 hover:bg-gray-300 active:bg-gray-300/90
+                  transition rounded-2xl flex flex-col items-center justify-center
+                  w-20 h-20 text-[11px] gap-1 md:w-24 md:h-24 md:gap-2">
+           <img
+             src="ley.png"
+             alt="Legislación actual"
+             class="w-6 h-6 md:w-8 md:h-8 object-contain"
+           />
+           <span class="leading-tight text-center">Legislación<br>actual</span>
+         </button>
+         
+         <button type="button" data-quick="Nuevas convocatorias"
+           class="bg-gray-200 hover:bg-gray-300 active:bg-gray-300/90
+                  transition rounded-2xl flex flex-col items-center justify-center
+                  w-20 h-20 text-[11px] gap-1 md:w-24 md:h-24 md:gap-2">
+           <img
+             src="anuncio.png"
+             alt="Nuevas convocatorias"
+             class="w-6 h-6 md:w-8 md:h-8 object-contain"
+           />
+           <span class="leading-tight text-center">Nuevas<br>convocatorias</span>
+         </button>
+         
     </section>
 
     <!-- caja de texto -->

@@ -4,9 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Municipio • Comunidad Energética</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roobert:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            roobert: ['"Roobert"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white flex flex-col h-screen px-6 overflow-hidden lg:px-20">
+<body class="bg-white flex flex-col h-screen px-6 overflow-hidden lg:px-20 font-roobert bg-white relative">
   <!-- header -->
   <header class="flex items-center justify-between h-[5.2rem] mt-1 select-none">
     <button onclick="history.back()" class="text-3xl leading-none">&larr;</button>
