@@ -17,7 +17,7 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" type="image/png" href="dslogo-transparente.png" />
+  <link rel="icon" type="image/png" href="./img/iconos/dslogo-transparente.png" />
   <style>
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -64,19 +64,19 @@
     <header class="relative flex items-center justify-center h-[5.2rem] mt-1 select-none">
       <!-- boton izquierdo fijo -->
       <button id="burger" class="absolute left-0 p-1">
-        <img src="./activeburger.png" alt="abrir menú" class="h-9 w-auto" />
+        <img src="./img/iconos/activeburger.png" alt="abrir menú" class="h-9 w-auto" />
       </button>
     
       <!-- logo centrado -->
       <a href="index.html" aria-label="volver a provincias" class="mx-auto">
-        <img src="dslogo.jpg" alt="logo ds" class="h-16 cursor-pointer" />
+        <img src="./img/iconos/dslogo.jpg" alt="logo ds" class="h-16 cursor-pointer" />
       </a>
     
       <!-- boton derecho fijo -->
       <button id="chatbot-btn"
               aria-label="abrir chatbot"
               class="absolute right-0 p-1 rounded-full bg-white ring-2 ring-gray-300/60 shadow-lg hover:bg-gray-100 transition active:scale-95">
-        <img id="chatbot-icon" src="chatbot.png" alt="chatbot" class="h-12 w-12 object-contain pointer-events-none" />
+        <img id="chatbot-icon" src="img/iconos/chatbot.png" alt="chatbot" class="h-12 w-12 object-contain pointer-events-none" />
       </button>
     </header>
     
@@ -86,7 +86,7 @@
                -translate-x-full transition-transform duration-300 flex flex-col
                rounded-r-2xl overflow-hidden">
     <div class="h-[5.2rem] flex items-center px-6">
-    <img src="dslogo.jpg" alt="logo" class="h-10" />
+    <img src="./img/iconos/dslogo.jpg" alt="logo" class="h-10" />
     </div>
 
     <nav class="flex-1 overflow-y-auto divide-y">
@@ -113,9 +113,8 @@
     <a href="https://comunidadenergeticalocal.es/"      class="block px-6 py-4 hover:bg-gray-100">Comunidades Energéticas Locales</a>
     <a href="chatbot.html"      class="block px-6 py-4 hover:bg-gray-100">Chatbot</a>
     <a href="https://dsconsultores.es/quienes-somos"      class="block px-6 py-4 hover:bg-gray-100">Quiénes somos</a>
-    
-    <!-- mas enlaces  -->
-    </nav>
+
+</nav>
     </aside>
 
     <!-- overlay -->
@@ -328,8 +327,8 @@
     const chatbotIcon = document.getElementById('chatbot-icon');
 
     // ruta de las dos versiones
-    const ICON_IDLE = 'chatbot.png';      // estado normal
-    const ICON_WINK = 'chatbotwink.png';  // guiño
+    const ICON_IDLE = './img/iconos/chatbot.png';      // estado normal
+    const ICON_WINK = './img/iconos/chatbotwink.png';  // guiño
 
     // cambia la imagen
     const showIcon = (src) => { chatbotIcon.src = src; };
@@ -350,7 +349,7 @@
       // redirigir al chatbot despues de 1 s
       setTimeout(() => {
         window.location.href = 'chatbot.html';
-      }, 500); // 1000 ms = 1 s
+      }, 500);
     });
 
 
@@ -424,12 +423,6 @@
 
       const municipios = data[prov] || [];
 
-      if (municipios.length === 0) {
-        const noData = document.createElement('div');
-        noData.className = 'col-span-2 text-center py-8';
-        noData.textContent = 'no hay municipios disponibles';
-        muniGrid.appendChild(noData);
-      } else {
     /* cada municipio enlaza a su pagina */
         municipios.forEach(name => {
           const imgName = name.normalize('NFD')
@@ -449,8 +442,8 @@
             <span class="block text-center text-sm">${name}</span>
           `;
           muniGrid.appendChild(link);
-        });
-      }
+    });
+      
       if (window.innerWidth >= 1024) {
         panel.classList.add('open');
       } else {
@@ -494,7 +487,7 @@
     }
 
     closeBtn.addEventListener('click', togglePanel);
-    
+  
   document.querySelectorAll('.province').forEach(btn => {
   btn.addEventListener('click', function () {
     const provincia = this.getAttribute('data-prov');
@@ -521,12 +514,12 @@ function handleSearch() {
   });
 
   // llena el panel con los resultados
-  panelTitle.textContent = `resultados: "${ searchInput.value }"`;
+  panelTitle.textContent = `Resultados: "${ searchInput.value }"`;
   muniGrid.innerHTML = '';
   if (results.length === 0) {
     const noData = document.createElement('div');
     noData.className = 'col-span-2 text-center py-8';
-    noData.textContent = 'no se encontraron municipios';
+    noData.textContent = 'No se encontraron municipios';
     muniGrid.appendChild(noData);
   } else {
     results.forEach(({ prov, name }) => {
@@ -552,6 +545,13 @@ function handleSearch() {
 
   // abre el panel
   panel.classList.remove('translate-y-full');
+
+  if (window.innerWidth >= 1024) {
+    panel.classList.add('open');        // escritorio
+  } else {
+    panel.classList.remove('translate-y-full'); // móvil
+  }
+  updateCloseBtnIcon();  // opcional: sincroniza la flecha
 }
 
 searchBtn.addEventListener('click', () => {
@@ -565,7 +565,6 @@ searchInput.addEventListener('keydown', e => {
     closeMenu();
   }
 });
-
   </script>
 </body>
 </html>
